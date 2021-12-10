@@ -1,0 +1,14 @@
+{
+  "name": "qiankun-test",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "lerna run --parallel serve",
+    "build": "lerna run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lerna": "^4.0.0"
+  }
+}
