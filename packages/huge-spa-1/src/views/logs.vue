@@ -9,7 +9,7 @@
     <input type="button" value="开始渲染" @click="renderTerm">
     <input type="button" value="停止渲染" @click="stopWriteTerm">
     <hr>
-    <div id="terminal"></div>
+    <div ref="logContainer" id="terminal"></div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 import {Terminal} from "xterm"
 import "xterm/css/xterm.css"
 import {FitAddon} from "xterm-addon-fit"
-import {WebglAddon} from "xterm-addon-webgl"
+// import {WebglAddon} from "xterm-addon-webgl"
 import {WebLinksAddon} from 'xterm-addon-web-links'
 import {SearchAddon} from 'xterm-addon-search'
 import {Unicode11Addon} from 'xterm-addon-unicode11'
@@ -31,8 +31,6 @@ export default {
       times: 0,
       renderInterval: 0,
     }
-  },
-  setup() {
   },
   mounted() {
     this.initTerm()
@@ -49,13 +47,13 @@ export default {
         scrollback: Infinity,
       })
       this.term = term
-      term.open(document.getElementById('terminal'))
+      term.open(this.$refs.logContainer)
 
-      const gl = new WebglAddon()
-      gl.onContextLoss(() => {
-        gl.dispose();
-      })
-      term.loadAddon(gl)
+      // const gl = new WebglAddon()
+      // gl.onContextLoss(() => {
+      //   gl.dispose();
+      // })
+      // term.loadAddon(gl)
 
       const fit = new FitAddon()
       this.fit = fit

@@ -1,105 +1,6 @@
 <template>
   <div>
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
-    <v-chart class="chart" :option="option" />
+    <v-chart v-for="i in count" :key="i" class="chart" :option="option" :init-options="initOptions" />
   </div>
 </template>
 
@@ -113,7 +14,7 @@ import {
   LegendComponent
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
+import { ref, reactive, defineComponent } from "vue";
 
 use([
   CanvasRenderer,
@@ -132,6 +33,10 @@ export default defineComponent({
     [THEME_KEY]: "dark"
   },
   setup () {
+    const count = ref(100);
+    const initOptions = reactive({
+      width: '400px',
+    });
     const option = ref({
       title: {
         text: "Traffic Sources",
@@ -170,7 +75,7 @@ export default defineComponent({
       ]
     });
 
-    return { option };
+    return { count, initOptions, option };
   }
 });
 </script>

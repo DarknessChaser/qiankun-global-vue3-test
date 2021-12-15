@@ -1,22 +1,23 @@
 <template>
   <div id="container">
-    <div id="editor-section"></div>
+    <div ref="monacoContainer" id="editor-section"></div>
     <button @click="runCode">Run</button>
   </div>
 </template>
 
 <script>
 import * as monaco from "monaco-editor";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import data from "../data/monaco.js";
 
 export default {
   name: "MMonacoEditor",
   setup() {
     let codeEditor = null;
+    const monacoContainer = ref(null);
 
     function initEditor() {
-      codeEditor = monaco.editor.create(document.getElementById("editor-section"), {
+      codeEditor = monaco.editor.create(monacoContainer.value, {
         value: data,
         language: "javascript",
         theme: "vs-dark"
@@ -29,10 +30,11 @@ export default {
     }
 
     onMounted(() => {
+      console.log(monacoContainer.value);
       initEditor();
     })
 
-    return { codeEditor, runCode }
+    return { codeEditor, runCode, monacoContainer }
   },
 };
 </script>
