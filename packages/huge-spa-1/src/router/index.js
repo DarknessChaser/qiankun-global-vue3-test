@@ -23,6 +23,8 @@ import echarts17 from '@/views/echarts-17';
 import echarts18 from '@/views/echarts-18';
 import echarts19 from '@/views/echarts-19';
 
+import daostyle from '@/views/daostyle';
+
 const routes = [
   { path: '/', name: 'home', component: home },
   { path: '/monaco', name: 'monaco', component: monaco },
@@ -48,6 +50,9 @@ const routes = [
   { path: '/echarts17', name: 'echarts17', component: echarts17 },
   { path: '/echarts18', name: 'echarts18', component: echarts18 },
   { path: '/echarts19', name: 'echarts19', component: echarts19 },
+
+  { path: '/daostyle', name: 'daostyle', component: daostyle },
+
 ];
 
 export default routes;
