@@ -1,6 +1,8 @@
 import './public-path';
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import daoStyle from '@dao-style/core';
+import '@dao-style/core/dist/style.css';
 import App from './App.vue';
 import routes from './router';
 import store from './store';
@@ -21,6 +23,7 @@ function render(props = {}) {
   instance = createApp(App);
   instance.use(router);
   instance.use(store);
+  instance.use(daoStyle);
   instance.mount(container ? container.querySelector('#app') : '#app');
 }
 
