@@ -24,7 +24,7 @@
       <router-link to="/echarts17">echarts17</router-link> |
       <router-link to="/echarts18">echarts18</router-link> |
       <router-link to="/echarts19">echarts19</router-link> |
-      <button @click="toChildren()">跳到另一个子应用 huge-2</button>
+      <button @click="toChildren()">跳到另一个子应用 No.2</button>
     </div>
     <router-view/>
   </div>

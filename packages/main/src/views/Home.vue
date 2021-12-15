@@ -2,14 +2,14 @@
   <div class="mainapp">
     <!-- 标题栏 -->
     <header class="mainapp-header">
-      <h1>QianKun</h1>
+      <div class="mainapp-header_title">QianKun</div>
     </header>
     <div class="mainapp-main">
       <!-- 侧边栏 -->
-      <ul class="mainapp-sidemenu">
-        <li><router-link to="/huge-spa-1" >huge-1</router-link></li>
-        <li><router-link to="/huge-spa-2" >huge-2</router-link></li>
-      </ul>
+      <div class="mainapp-sidemenu">
+        <li><router-link to="/huge-spa-1" >No.1 App</router-link></li>
+        <li><router-link to="/huge-spa-2" >No.2 App</router-link></li>
+      </div>
       <!-- 子应用  -->
       <main id="subapp-container">
         <router-view />
@@ -23,58 +23,65 @@
 </script>
 
 <style lang="scss">
-.mainapp-header {
-  > h1 {
-    color: #333;
-    font-size: 36px;
-    font-weight: 700;
-    margin: 0;
-    padding: 36px;
+.mainapp {
+  height: 100%;
+
+  &-header {
+    z-index: 2000;
+    display: flex;
+    height: 40px;
+    background-color: #1f2126;
+    align-items: center;
+    &_title {
+      margin-left: 10px;
+      color: grey;
+    }
   }
-}
 
-.mainapp-main {
-  display: flex;
+  &-main {
+    display: flex;
+    height: 100%;
 
-  .mainapp-sidemenu {
-    width: 130px;
-    list-style: none;
-    margin: 0;
-    margin-left: 40px;
-    padding: 0;
-    border-right: 2px solid #aaa;
+    .mainapp-sidemenu {
+      list-style: none;
+      width: 200px;
+      background-color: #373b41;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      height: 100%;
 
-    >li {
-      color: #aaa;
-      margin: 20px 0;
-      font-size: 18px;
-      font-weight: 400;
-      cursor: pointer;
+      li {
+        margin: 20px 15px;
+        font-size: 18px;
+        font-weight: 400;
+        text-align: left;
+        cursor: pointer;
 
-      &:hover {
-        color: #444;
-      }
+        a {
+          color: #aaa;
+          text-decoration: none;
 
-      &:first-child {
-        margin-top: 5px;
+          &:active, &:focus{
+            color: #fff;
+          }
+        }
       }
     }
   }
-}
 
-// 子应用区域
-#subapp-container {
-  flex-grow: 1;
-  position: relative;
-  margin: 0 40px;
+  // 子应用区域
+  #subapp-container {
+    flex: 1;
+    position: relative;
+    overflow: scroll;
 
-  .subapp-loading {
-    color: #444;
-    font-size: 28px;
-    font-weight: 600;
-    text-align: center;
+    .subapp-loading {
+      color: #444;
+      font-size: 28px;
+      font-weight: 600;
+      text-align: center;
+    }
   }
 }
-
-
 </style>

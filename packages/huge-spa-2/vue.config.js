@@ -9,8 +9,9 @@ function resolve(dir) {
 const port = 7002;
 
 module.exports = {
+  publicPath: '/',
   outputDir: 'dist',
-  assetsDir: 'static',
+  assetsDir: 'huge-spa-2',
   filenameHashing: true,
   devServer: {
     hot: true,
@@ -36,7 +37,7 @@ module.exports = {
     },
     output: {
       // 把子应用打包成 umd 库格式
-      library: `${packageName}-[name]`,
+      library: 'huge-spa-2',
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${packageName}`,
     },

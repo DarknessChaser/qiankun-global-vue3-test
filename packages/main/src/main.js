@@ -8,13 +8,13 @@ createApp(App).use(router).mount('#app')
 const apps = [
   {
     name: 'huge-spa-1',
-    entry: 'http://localhost:7001', // 通过fetch加载html，js并且动态执行，所以子应用必须支持跨域
+    entry: process.env.NODE_ENV === 'production' ? window.location.origin + '/huge-spa-1' : 'http://localhost:7001', // 通过fetch加载html，js并且动态执行，所以子应用必须支持跨域
     container: '#vue', // 容器
     activeRule: '/huge-spa-1' // 激活条件
   },
   {
     name: 'huge-spa-2',
-    entry: 'http://localhost:7002',
+    entry: process.env.NODE_ENV === 'production' ? window.location.origin + '/huge-spa-2' : 'http://localhost:7002', // 通过fetch加载html，js并且动态执行，所以子应用必须支持跨域
     container: '#vue',
     activeRule: '/huge-spa-2'
   },

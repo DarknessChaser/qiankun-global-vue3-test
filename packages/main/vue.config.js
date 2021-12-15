@@ -8,6 +8,7 @@ function resolve(dir) {
 const port = 7000;
 
 module.exports = {
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
@@ -33,7 +34,7 @@ module.exports = {
     },
     output: {
       // 把子应用打包成 umd 库格式
-      library: `${name}-[name]`,
+      library: `${name}`,
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${name}`,
     },
