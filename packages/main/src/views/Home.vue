@@ -9,6 +9,7 @@
       <div class="mainapp-sidemenu">
         <li><router-link to="/huge-spa-1" >No.1 App</router-link></li>
         <li><router-link to="/huge-spa-2" >No.2 App</router-link></li>
+        <li><router-link to="/dao-style-c" >Dao Style</router-link></li>
       </div>
       <!-- 子应用  -->
       <main id="subapp-container">
@@ -16,7 +17,7 @@
       </main>
     </div>
   </div>
-  <router-view/>
+  <!-- <router-view /> -->
 </template>
 
 <script>

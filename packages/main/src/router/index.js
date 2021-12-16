@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import mini from '../components/mini.vue'
+import daostylecomponent from '../components/daostyle.vue'
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
           path: '/huge-spa-2:pathMatch(.*)',
           name: 'huge-spa-2',
           component: mini
+        },
+        {
+          path: '/dao-style-c',
+          name: 'dao-style-component',
+          component: daostylecomponent
         },
       ]
   }

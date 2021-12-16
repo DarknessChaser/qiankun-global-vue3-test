@@ -2,8 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { registerMicroApps, start } from 'qiankun'
+import daoStyle from '@dao-style/core';
+import '@dao-style/core/dist/style.css';
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(daoStyle).mount('#app')
 
 const apps = [
   {

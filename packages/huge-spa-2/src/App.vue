@@ -23,7 +23,8 @@
       <router-link to="/echarts16">echarts16</router-link> |
       <router-link to="/echarts17">echarts17</router-link> |
       <router-link to="/echarts18">echarts18</router-link> |
-      <router-link to="/echarts19">echarts19</router-link>
+      <router-link to="/echarts19">echarts19</router-link> |
+      <router-link to="/daostyle">daostyle</router-link> |
     </div>
     <router-view/>
   </div>
