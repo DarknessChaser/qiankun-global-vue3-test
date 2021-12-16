@@ -1,5 +1,5 @@
 # build stage
-FROM node:14 as dist
+FROM node:16-alpine as dist
 ARG MODE=prod
 WORKDIR /app
 COPY package.json ./
