@@ -3,12 +3,14 @@
     <!-- 标题栏 -->
     <header class="mainapp-header">
       <div class="mainapp-header_title">QianKun</div>
+      <span class="mainapp-header_title" @click="changeParentState">主项目的数据：{{ cart.commonData }}，点击变回1</span>
+      <button @click="sendHttp">发个http</button>
     </header>
     <div class="mainapp-main">
       <!-- 侧边栏 -->
       <div class="mainapp-sidemenu">
         <li><router-link to="/huge-spa-1" >No.1 App</router-link></li>
-        <li><router-link to="/huge-spa-2" >No.2 App</router-link></li>
+        <!-- <li><router-link to="/huge-spa-2" >No.2 App</router-link></li> -->
         <li><router-link to="/dao-style-c" >Dao Style</router-link></li>
       </div>
       <!-- 子应用  -->
@@ -21,6 +23,38 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+import axios from "axios";
+import { useCartStore } from '../store/cart';
+
+export default defineComponent({
+  setup() {
+    const cart = useCartStore();
+
+
+    const changeParentState = () => {
+      // cart.setCommonData(1);
+      cart.commonData = 1;
+
+      const http = axios.create({
+        headers: {
+          myTest:'from main',
+        }
+      })
+      cart.setAxios(http);
+    }
+
+    const sendHttp = () => {
+      cart.axios.post('test', {data: {name: '主应用'}})
+    }
+
+    return {
+      cart,
+      changeParentState,
+      sendHttp,
+    };
+  },
+});
 </script>
 
 <style lang="scss">

@@ -229,4 +229,5 @@ export default {
   background-color: #3b82f6;
   border-radius: 0.375rem;
 }
+
 </style>

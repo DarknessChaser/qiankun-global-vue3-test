@@ -1,25 +1,38 @@
-import { createApp } from 'vue'
+import { createApp, ref } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { registerMicroApps, start } from 'qiankun'
+import { registerMicroApps } from 'qiankun'
 import daoStyle from '@dao-style/core';
+import { createPinia } from 'pinia';
+import store from './store/index';
+
 import '@dao-style/core/dist/style.css';
 
-createApp(App).use(router).use(daoStyle).mount('#app')
+createApp(App).use(router).use(daoStyle).use(createPinia()).mount('#app')
+
+let q = ref({ p: 1 });
+
+setInterval(() => {
+ q.value.p += 1;
+}, 5000);
 
 const apps = [
   {
     name: 'huge-spa-1',
     entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7001` : 'http://localhost:7001',
     container: '#vue', // 容器
-    activeRule: '/huge-spa-1' // 激活条件
+    activeRule: '/huge-spa-1', // 激活条件
+    props: {
+      data: store,
+      q,
+    }
   },
-  {
-    name: 'huge-spa-2',
-    entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7002` : 'http://localhost:7002',
-    container: '#vue',
-    activeRule: '/huge-spa-2'
-  },
+  // {
+  //   name: 'huge-spa-2',
+  //   entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7002` : 'http://localhost:7002',
+  //   container: '#vue',
+  //   activeRule: '/huge-spa-2'
+  // },
 ]
 
 const lifeCycles = {

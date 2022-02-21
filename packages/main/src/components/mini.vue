@@ -7,9 +7,7 @@ export default {
     mounted() {
         if (!window.qiankunStarted) {
             window.qiankunStarted = true;
-            start({
-                sandbox: { strictStyleIsolation: true }
-            })
+            start({})
         }
     }
 }

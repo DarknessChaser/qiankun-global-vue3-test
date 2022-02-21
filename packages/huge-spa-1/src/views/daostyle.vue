@@ -204,6 +204,7 @@ export default {
 
   },
   mounted() {
+    this.$test = { a: 123 };
     console.log('show dao style');
   },
   methods: {

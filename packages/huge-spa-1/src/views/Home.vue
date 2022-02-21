@@ -1,37 +1,49 @@
 <template>
-  <img alt="Vue logo" src="../assets/logo.png" />
-  <HelloWorld msg="Vue.js Demo" @close="close"> </HelloWorld>
+  <div>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <button @click="sendHttp">发个http</button>
+    <button @click="changeParentState">改个ParentState</button>
+    {{ mes }}/
+  </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
+import { defineComponent, getCurrentInstance, inject, watchEffect, computed, toRefs, customRef, reactive, ref } from 'vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
+export default defineComponent({
+  setup() {
+    const { proxy } = getCurrentInstance();
+    const mes = ref(inject('message'));
+
+
+    setInterval(() => {
+      console.error('mes', mes)
+    }, 5000);
+
+    setInterval(() => {
+      console.error('setTimeout mes', mes); 
+    }, 6000);
+
+
+    const sendHttp = () => {
+      console.error('message2', mes);
+    }
+
+    const changeParentState = () => {
+      proxy.$pinia.useCartStore().commonData = 3;
+    }
+
+    watchEffect(mes, () => {
+      console.error('watchEffect', mes)
+    }, { deep: true, immediate: true })
+
+    return {
+      mes,
+      sendHttp,
+      changeParentState,
+    };
   },
-  created() {
-    console.log('vue2.0写法 created');
-  },
-  mounted() {
-    console.log(this.$route);
-  },
-  methods: {
-    close() {
-      console.log('close');
-    },
-  },
-};
+});
 </script>
-
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
 </style>

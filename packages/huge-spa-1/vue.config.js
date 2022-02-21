@@ -1,5 +1,4 @@
 const path = require('path');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const packageName = require('./package.json').name;
 
 function resolve(dir) {
@@ -28,7 +27,7 @@ module.exports = {
   // 自定义webpack配置
   configureWebpack: {
     plugins: [
-      new MonacoWebpackPlugin(), // Place it here
+      // new MonacoWebpackPlugin(), // Place it here
     ],
     resolve: {
       alias: {
