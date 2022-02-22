@@ -1,5 +1,5 @@
 import './public-path';
-import { createApp, reactive, toRaw } from 'vue';
+import { createApp, reactive } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import daoStyle from '@dao-style/core';
 import './assets/common.less';
@@ -44,32 +44,16 @@ export async function bootstrap() {
   console.log('%c ', 'color: green;', 'vue3.0 app bootstraped');
 }
 
-// function storeTest(props) {
-//   props.onGlobalStateChange &&
-//     props.onGlobalStateChange(
-//       (value, prev) => console.error(`[onGlobalStateChange - ${props.q}]:`, value, prev),
-//       true,
-//     );
-//   props.setGlobalState &&
-//     props.setGlobalState({
-//       ignore: props.data,
-//       store: {
-//         data: props.data,
-//       },
-//     });
-// }
-
 export async function mount(props) {
-  console.error('props from main framework', props.q); 
-
-  // storeTest(props);
+  console.warn('props from main framework', props);
   render(props);
-  instance.provide('message', props.q);
-  instance.config.globalProperties.$onGlobalStateChange = props.onGlobalStateChange;
-  instance.config.unwrapInjectedRef = true;
-  instance.config.globalProperties.$setGlobalState = props.setGlobalState;
-  instance.config.globalProperties.$pinia = reactive(props.data);
-  instance.config.globalProperties.$q = reactive(props.q);
+  // const createDefaultGlobal= defineStore(props.defaultStore);
+  // props.handlers.token.push(createDefaultGlobal().setToken);
+  // instance.config.globalProperties.$createDefaultGlobal = createDefaultGlobal;
+  instance.provide('defaultStore',props.defaultStore);
+  // instance.config.globalProperties.$defaultStore = props.defaultStore;
+  instance.provide('handlers',props.handlers);
+  // instance.config.globalProperties.$handlers = props.handlers;
 }
 
 export async function unmount() {

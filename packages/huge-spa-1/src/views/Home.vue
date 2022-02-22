@@ -1,46 +1,57 @@
 <template>
   <div>
     <img alt="Vue logo" src="../assets/logo.png" />
-    <button @click="sendHttp">发个http</button>
-    <button @click="changeParentState">改个ParentState</button>
-    {{ mes }}/
+    <button @click="changeToken">改个token</button>{{globalStore.token}}
   </div>
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, inject, watchEffect, computed, toRefs, customRef, reactive, ref } from 'vue';
+import {defineComponent, getCurrentInstance, inject} from 'vue';
+import {defineStore} from "pinia"
+
+const copyStore = {
+  id: 'global',
+  state: () => ({
+    name: 'initGlobalState',
+    token: 'initToken'
+  }),
+  getters: {
+    getName() {
+      return this.name;
+    },
+    getToken() {
+      return this.token;
+    }
+  },
+  actions: {
+    setName(val) {
+      this.name = val;
+    },
+    setToken(val) {
+      this.token = val;
+    }
+  },
+}
 
 export default defineComponent({
   setup() {
-    const { proxy } = getCurrentInstance();
-    const mes = ref(inject('message'));
+    const currentInstance = getCurrentInstance();
+    currentInstance;
+    // console.log(currentInstance,currentInstance.proxy.$defaultStore,currentInstance.$handlers,defineStore);
+    const defaultStore = copyStore || inject('defaultStore');
+    const handlers = inject('handlers');
+    const useGlobalStore = defineStore(defaultStore);
+    const globalStore = useGlobalStore();
+    handlers.token.push(globalStore.setToken);
+    console.log(handlers.token)
 
-
-    setInterval(() => {
-      console.error('mes', mes)
-    }, 5000);
-
-    setInterval(() => {
-      console.error('setTimeout mes', mes); 
-    }, 6000);
-
-
-    const sendHttp = () => {
-      console.error('message2', mes);
+    const changeToken = () => {
+      globalStore.setToken(3);
     }
-
-    const changeParentState = () => {
-      proxy.$pinia.useCartStore().commonData = 3;
-    }
-
-    watchEffect(mes, () => {
-      console.error('watchEffect', mes)
-    }, { deep: true, immediate: true })
 
     return {
-      mes,
-      sendHttp,
-      changeParentState,
+      globalStore,
+      changeToken,
     };
   },
 });
