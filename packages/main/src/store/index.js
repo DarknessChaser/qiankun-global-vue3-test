@@ -1,5 +1,9 @@
-import { useCartStore } from './cart';
+import {useCartStore} from './cart';
+import {globalStoreConfig, useGlobalStore,handlers} from './global';
 
 export default {
-  useCartStore,
+    useCartStore,
+    useGlobalStore,
+    globalStoreConfig,
+    handlers
 };
