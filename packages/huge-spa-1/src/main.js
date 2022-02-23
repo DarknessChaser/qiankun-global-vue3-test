@@ -1,5 +1,5 @@
 import './public-path';
-import { createApp, reactive } from 'vue';
+import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import daoStyle from '@dao-style/core';
 import './assets/common.less';
@@ -7,18 +7,11 @@ import '@dao-style/core/dist/style.css';
 import App from './App.vue';
 import routes from './router';
 // import store from './store';
-import { createPinia } from "pinia"
+import { createPinia,defineStore } from "pinia"
 
 let router = null;
 let instance = null;
 let history = null;
-
-
-let q = reactive({ p: 1 });
-
-setInterval(() => {
- q.p += 1;
-}, 5000);
 
 function render(props = {}) {
   const { container } = props;
@@ -47,13 +40,7 @@ export async function bootstrap() {
 export async function mount(props) {
   console.warn('props from main framework', props);
   render(props);
-  // const createDefaultGlobal= defineStore(props.defaultStore);
-  // props.handlers.token.push(createDefaultGlobal().setToken);
-  // instance.config.globalProperties.$createDefaultGlobal = createDefaultGlobal;
-  instance.provide('defaultStore',props.defaultStore);
-  // instance.config.globalProperties.$defaultStore = props.defaultStore;
-  instance.provide('handlers',props.handlers);
-  // instance.config.globalProperties.$handlers = props.handlers;
+  props.registerGlobalStoreHandler(instance, defineStore);
 }
 
 export async function unmount() {

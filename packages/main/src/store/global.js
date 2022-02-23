@@ -1,15 +1,17 @@
 // @ts-check
 import {defineStore} from 'pinia';
 
-export const handlers = {
-    'token': [
+const handlers = new Map();
 
-    ]
+const setFn = (id, val) => {
+    handlers.get(id).forEach(fn => {
+        if (typeof fn === 'function') {
+            fn(val)
+        }
+    });
 }
 
-let running = false;
-
-export const defaultStore = {
+const globalStoreConfig = {
     id: 'global',
     state: () => ({
         name: 'initGlobalState',
@@ -25,17 +27,33 @@ export const defaultStore = {
     },
     actions: {
         setName(val) {
-            this.name = val;
+            setFn('name',val);
         },
         setToken(val) {
-            this.token = val;
-            if(!running) {
-                running = true;
-                handlers.token.forEach(fn=>fn());
-                running = false;
-            }
+            setFn('token',val);
         }
     },
 }
 
-export const useGlobalStore = defineStore(defaultStore)
+export const useGlobalStore = defineStore(globalStoreConfig);
+
+export const initGlobalStore = ()=> {
+    const state = globalStoreConfig.state();
+    const store = useGlobalStore();
+    Object.keys(state).forEach(key => {
+        handlers.set(key,new Set());
+        handlers.get(key).add((val)=>store[key]=val);
+    })
+}
+
+export const registerGlobalStoreHandler = (app,defineStore)=> {
+    const useChildStore= defineStore(globalStoreConfig);
+    const childStore = useChildStore();
+    const state = globalStoreConfig.state();
+    Object.keys(state).forEach(key => {
+        handlers.get(key).add((val)=>childStore[key]=val);
+    })
+    app.provide('globalStore',childStore);
+    app.config.globalProperties.$globalStore = childStore;
+    return childStore;
+}
