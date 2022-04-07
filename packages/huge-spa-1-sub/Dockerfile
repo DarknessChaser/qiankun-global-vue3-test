@@ -15,5 +15,5 @@ COPY --from=dist /app/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dist /app/dist /usr/share/nginx/html
 
-EXPOSE 7010
+EXPOSE 7011
 CMD ["nginx", "-g", "daemon off;"]

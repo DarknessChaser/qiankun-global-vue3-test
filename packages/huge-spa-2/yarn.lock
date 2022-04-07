@@ -911,10 +911,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@dao-style/core@experimental":
-  version "0.0.0-experimental-800541722db76661983e84b4a9b4d464"
-  resolved "https://registry.npmmirror.com/@dao-style/core/download/@dao-style/core-0.0.0-experimental-800541722db76661983e84b4a9b4d464.tgz#f34bd6ec07d476866ccdd3b8a733ffd3041352f7"
-  integrity sha512-Wlcm4Lv3WEbu3PQBQNTD8dIhP5CQ4umlducf05FVy3ozKYmEQbDU3zKjQCUv4FEw01FXIJ+JIpTQQSnbGImBKQ==
+"@dao-style/core@0.0.1-beta.12":
+  version "0.0.1-beta.12"
+  resolved "https://registry.npmmirror.com/@dao-style/core/-/core-0.0.1-beta.12.tgz#d2bc83c7bad211b6ec2cbd5d653e262db8cdd1ff"
+  integrity sha512-aNGPEokkFVi06CkgEMFAERmPtKDMpjapr1JxHGppc2IBJyqbi5vyOHhjNeopaqYHzzGR+/dQP5HtqCP1W1GLuw==
   dependencies:
     "@popperjs/core" "^2.10.2"
 
@@ -4953,8 +4953,6 @@ is-glob@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmmirror.com/is-glob/download/is-glob-3.1.0.tgz#7ba5ae24217804ac70707b96922567486cc3e84a"
   integrity sha1-e6WuJCF4BKxwcHuWkiVnSGzD6Eo=
-  dependencies:
-    is-extglob "^2.1.0"
 
 is-glob@^4.0.0, is-glob@^4.0.1, is-glob@~4.0.1:
   version "4.0.3"

@@ -18,11 +18,11 @@ const globalStoreConfig = {
         token: 'initToken'
     }),
     getters: {
-        getName() {
-            return this.name;
+        getName(state) {
+            return state.name;
         },
-        getToken() {
-            return this.token;
+        getToken(state) {
+            return state.token;
         }
     },
     actions: {
@@ -46,14 +46,21 @@ export const initGlobalStore = ()=> {
     })
 }
 
-export const registerGlobalStoreHandler = (app,defineStore)=> {
-    const useChildStore= defineStore(globalStoreConfig);
+export const registerGlobalStoreHandler = (app, defineStore) => {
+    const globalStore = useGlobalStore();
+    const useChildStore = defineStore(globalStoreConfig);
     const childStore = useChildStore();
-    const state = globalStoreConfig.state();
-    Object.keys(state).forEach(key => {
-        handlers.get(key).add((val)=>childStore[key]=val);
-    })
-    app.provide('globalStore',childStore);
+    const globalState = globalStore.$state;
+    childStore.$state = {
+        ...globalState,
+    };
+    const globalStateKeys = Object.keys(globalState)
+    globalStateKeys.forEach((key) => {
+        handlers.get(key).add((val) => {
+                childStore[key] = val;
+            });
+    });
+    app.provide('globalStore', childStore);
     app.config.globalProperties.$globalStore = childStore;
     return childStore;
 }

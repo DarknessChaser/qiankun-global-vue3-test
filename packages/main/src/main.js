@@ -16,9 +16,18 @@ initGlobalStore();
 const apps = [
     {
         name: 'huge-spa-1',
-        entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7001` : 'http://localhost:7001',
+        entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7010` : 'http://localhost:7010',
         container: '#vue', // 容器
         activeRule: '/huge-spa-1', // 激活条件
+        props: {
+            registerGlobalStoreHandler,
+        }
+    },
+    {
+        name: 'huge-spa-1-sub',
+        entry: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.hostname}:7011` : 'http://localhost:7011',
+        container: '#vue', // 容器
+        activeRule: '/huge-spa-1-sub', // 激活条件
         props: {
             registerGlobalStoreHandler,
         }

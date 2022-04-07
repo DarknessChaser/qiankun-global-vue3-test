@@ -5,12 +5,12 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-const port = 7010;
+const port = 7011;
 
 module.exports = {
   publicPath: '/',
   outputDir: 'dist',
-  assetsDir: 'huge-spa-1',
+  assetsDir: 'huge-spa-1-sub',
   filenameHashing: true,
   devServer: {
     hot: true,
@@ -36,7 +36,7 @@ module.exports = {
     },
     output: {
       // 把子应用打包成 umd 库格式
-      library: 'huge-spa-1',
+      library: 'huge-spa-1-sub',
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${packageName}`,
     },
